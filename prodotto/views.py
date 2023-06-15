@@ -95,13 +95,10 @@ class CategoriaCreateView(CreateView):  # new
 class CategoriaDetailView(DetailView):  # new
     model = Categoria
     template_name = "prodotto_list.html"
-    
+
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        query = self.request.GET.get('query')
-        if query is None:
-            query = ''
-        context["object_list"] = self.get_object().prodotti.filter(Q(nome_prodotto__icontains=query) | Q(descrizione__icontains=query))
+        context["object_list"] = self.get_object().prodotti.all()
         return context
 
 
