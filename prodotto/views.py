@@ -19,8 +19,8 @@ class ProdottoListView(ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("query")
-        if query == 'None':
-            query = ' '
+        if query is None:
+            query = ''
         object_list = Prodotto.objects.filter(
             Q(nome_prodotto__icontains=query) | Q(descrizione__icontains=query)
         )
@@ -99,8 +99,8 @@ class CategoriaDetailView(DetailView):  # new
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get('query')
-        if query == 'None':
-            query = ' '
+        if query is None:
+            query = ''
         context["object_list"] = self.get_object().prodotti.filter(Q(nome_prodotto__icontains=query) | Q(descrizione__icontains=query))
         return context
 
