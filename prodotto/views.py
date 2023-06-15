@@ -19,7 +19,7 @@ class ProdottoListView(ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("query")
-        object_list = Prodotti.objects.filter(
+        object_list = Prodotto.objects.filter(
             Q(nome_prodotto__icontains=query) | Q(descrizione__icontains=query)
         )
         return object_list
